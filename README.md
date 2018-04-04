@@ -13,9 +13,8 @@ $ composer require tintran/pdf_exif
 ## Usage
 Read and extract information from a PDF file
 ```php
-$p = new PDFlib();
-$read = new PDFLibrary($file, $p);
-var_dump($read->get_pdf_prop());
+$read = new PDFLibrary($file);
+var_dump($read->get_pdf_all());
 var_dump($read->get_pdf_title());
 var_dump($read->get_pdf_author());
 ```
