@@ -17,26 +17,21 @@ class PDFLibrary {
     
     public function __construct($file) {
         $this->p = new \PDFlib();
-        try {
-            // Check return values of load_font() etc.
-            $this->p->set_option("errorpolicy=return");
-            $this->p->set_option("stringformat=utf8");
+        // Check return values of load_font() etc.
+        $this->p->set_option("errorpolicy=return");
+        $this->p->set_option("stringformat=utf8");
 
-            // Open the input document
-            $this->doc = $this->p->open_pdi_document(realpath($file), "");
-            if ($this->doc == 0) {
-        		printf("Error: " . $this->p->get_errmsg());
-            } else {
-                $this->set_general_info();
-                $this->set_detail_info();
-                $this->set_key_info();
-                $this->set_XMP_metadata_info();
-            }
-            $this->p->close_pdi_document($this->doc);
+        // Open the input document
+        $this->doc = $this->p->open_pdi_document(realpath($file), "");
+        if ($this->doc == 0) {
+    		printf("Error: " . $this->p->get_errmsg());
+        } else {
+            $this->set_general_info();
+            $this->set_detail_info();
+            $this->set_key_info();
+            $this->set_XMP_metadata_info();
         }
-        catch (Exception $e) {
-            print($e);
-        }
+        $this->p->close_pdi_document($this->doc);
     }
 
     /* --------- general information (always available) */
