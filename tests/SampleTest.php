@@ -5,13 +5,11 @@ use PHPUnit\Framework\TestCase;
 
 class SampleTest extends TestCase {
 
-	private $file;
+	private $file = "resources/hello.pdf";
 	private $p;
 
 	public function testTitleProperty() {
-		$this->file = "resources/hello.pdf";
-		$this->p = new PDFlib();
-		$expectedFile = new PDFLibrary($this->file, $this->p);
+		$expectedFile = new PDFLibrary($this->file);
 		$expectedResult = $expectedFile->get_pdf_title();
 
 		$data = $this->getBasicData();
@@ -20,9 +18,7 @@ class SampleTest extends TestCase {
 	}
 
 	public function testAuthorProperty() {
-		$this->file = "resources/hello.pdf";
-		$this->p = new PDFlib();
-		$expectedFile = new PDFLibrary($this->file, $this->p);
+		$expectedFile = new PDFLibrary($this->file);
 		$expectedResult = $expectedFile->get_pdf_author();
 
 		$data = $this->getBasicData();
@@ -34,9 +30,10 @@ class SampleTest extends TestCase {
 
 	public function getBasicData() {
 		$data = Array();
+		$this->p = new PDFlib();	
         $doc = $this->p->open_pdi_document(realpath($this->file), "");
         if ($doc == 0) {
-    		die("Error: " . $this->p->get_errmsg());
+    		printf("Error: " . $this->p->get_errmsg());
         }
 
         $count = $this->p->pcos_get_number($doc, "length:/Info");
@@ -49,7 +46,7 @@ class SampleTest extends TestCase {
     		$len = 12 - strlen($key);
     		while ($len-- > 0) print(" ");
 
-    		/* $info entries can be stored as string or name objects */
+    		// $info entries can be stored as string or name objects
     		if ($objtype == "name" || $objtype == "string") {
     		    $info = "/Info[" . $i . "]";
     		    $data[$key] = $this->p->pcos_get_string($doc,$info);

@@ -4,9 +4,8 @@
 	use TinTran\PDFLibrary\PDFLibrary;
 
 	$file = "resources/hello.pdf";
-	$p = new PDFlib();
-	$read = new PDFLibrary($file, $p);
+	$read = new PDFLibrary($file);
 
-	var_dump($read->get_pdf_prop());
+	var_dump($read->get_pdf_all());
 	var_dump($read->get_pdf_title());
 	var_dump($read->get_pdf_author());
