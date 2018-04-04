@@ -17,21 +17,26 @@ class PDFLibrary {
     
     public function __construct($file) {
         $this->p = new \PDFlib();
-        // Check return values of load_font() etc.
-        $this->p->set_option("errorpolicy=return");
-        $this->p->set_option("stringformat=utf8");
+        try {
+            // Check return values of load_font() etc.
+            $this->p->set_option("errorpolicy=return");
+            $this->p->set_option("stringformat=utf8");
 
-        // Open the input document
-        $this->doc = $this->p->open_pdi_document(realpath($file), "");
-        if ($this->doc == 0) {
-    		printf("Error: " . $this->p->get_errmsg());
-        } else {
-            $this->set_general_info();
-            $this->set_detail_info();
-            $this->set_key_info();
-            $this->set_XMP_metadata_info();
+            // Open the input document
+            $this->doc = $this->p->open_pdi_document(realpath($file), "");
+            if ($this->doc == 0) {
+        		printf("Error: " . $this->p->get_errmsg());
+            } else {
+                $this->set_general_info();
+                $this->set_detail_info();
+                $this->set_key_info();
+                $this->set_XMP_metadata_info();
+            }
+            $this->p->close_pdi_document($this->doc);
         }
-        $this->p->close_pdi_document($this->doc);
+        catch (Exception $e) {
+            print($e);
+        }
     }
 
     /* --------- general information (always available) */
@@ -98,7 +103,6 @@ class PDFLibrary {
     public function get_pdf_author() {
         return $this->output['Author'];
     }
-
 
 }
 
