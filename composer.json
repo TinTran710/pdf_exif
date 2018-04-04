@@ -1,0 +1,19 @@
+{
+    "name": "tintran/pdf_exif",
+    "description": "Package for extracting information from PDF file",
+    "authors": [
+        {
+            "name": "Tran Quang Tin",
+            "email": "tranquangtin710@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "TinTran\\PDFLibrary\\": "src/"
+        }
+    },
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^6.0"
+    }
+}
