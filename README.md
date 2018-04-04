@@ -7,7 +7,7 @@ You should have PDFlib installed properly to your system. Refer at this [link](h
 ## Installation
 The package can be installed via composer:
 ``` bash
-$ composer require tintran/pdf-exif
+$ composer require tintran/pdf_exif
 ```
 
 ## Usage
